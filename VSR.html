@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel ="stylesheet" type ="text/css" href = "Luna.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Luna Technology - View Sales Report</title>
+</head>
+<body>
+    <header>
+        <div style="display: flex; flex-direction: row;">
+            <div><img src="LUNA-removebg-preview.png" alt="Profile Image" class="logo"></div>
+        </div>
+    </header>
+    <div style="display: flex; flex-direction: row;">
+            <div class="side1">
+                        <h3><a href="Luna.html">HOME</a></h3>
+                        <h3><a href="VSR.html">VIEW SALES REPORT</a></h3>
+                        <h3><a href="ESR.html">CREATE SALES REPORT</a></h3>
+                        <h3><a href="Help.html">HELP</a></h3>
+                </div>
+            <div class="main">
+                <h1 class="a">SALES REPORTS</h1>
+                <hr style="height:2px;border-width:0;color:gray;background-color:gray;margin-top: 0;">
+            <div class="vsrtop">
+                <h3>Sales Report Name:</h3>
+                <h2 class="SRN"></h2>
+            </div>
+            <div style="margin-left: 70px;">
+                <table id="userData">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Customer Type:</th>
+                            <th>Name</th>
+                            <th>Call Type</th>
+                            <th>Item No.</th>
+                            <th>Item Name</th>
+                            <th>Item Description</th>
+                            <th>Unit Cost (₱)</th>
+                            <th>Quantity</th>
+                            <th>Amount (₱)</th>
+                            <th>Tax Rate (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="Date"></td>
+                            <td class="Time"></td>
+                            <td class="CST"></td>
+                            <td class="NameP"></td>
+                            <td class="CT"></td>
+                            <td class="Ino"></td>
+                            <td class="In"></td>
+                            <td class="Ide"></td>
+                            <td class="UC"></td>
+                            <td class="Quantity"></td>
+                            <td class="AM"></td>
+                            <td class="TaxR"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            </div>  
+            
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    displaySRNData();
+                    displayUserData();
+                });
+        
+                function displaySRNData() {
+                    var SRNData = JSON.parse(localStorage.getItem('SRNData')) || [];
+                    var SRN = document.querySelector('.SRN');
+        
+                    if (SRNData.length > 0) {
+                        SRN.textContent = SRNData[0].name; // Display the first name in the SRNData array
+                    } else {
+                        SRN.textContent = "No data available"; 
+                    }
+                }
+
+                function displayUserData() {
+                var userData = JSON.parse(localStorage.getItem('userData')) || [];
+                var tableBody = document.querySelector('#userData tbody');
+                tableBody.innerHTML = '';
+
+                userData.forEach(function(user, index) {
+                    var row = tableBody.insertRow();
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    var cell3 = row.insertCell(2);
+                    var cell4 = row.insertCell(3);
+                    var cell5 = row.insertCell(4);
+                    var cell6 = row.insertCell(5);
+                    var cell7 = row.insertCell(6);
+                    var cell8 = row.insertCell(7);
+                    var cell9 = row.insertCell(8);
+                    var cell10 = row.insertCell(9);
+                    var cell11 = row.insertCell(10);
+                    var cell12 = row.insertCell(11);
+                    var cell13 = row.insertCell(12);
+                    var cell14 = row.insertCell(13);
+
+                    cell1.innerHTML = user.Date;
+                    cell2.innerHTML = user.Time;
+                    cell3.innerHTML = user.CST;
+                    cell4.innerHTML = user.NameP;
+                    cell5.innerHTML = user.CT;
+                    cell6.innerHTML = user.Ino;
+                    cell7.innerHTML = user.In;
+                    cell8.innerHTML = user.Ide;
+                    cell9.innerHTML = user.UC;
+                    cell10.innerHTML = user.Quantity;
+                    cell11.innerHTML = (user.UC * user.Quantity).toFixed(2);
+                    cell12.innerHTML = user.TaxR;
+                    cell13.innerHTML = '<button onclick="deleteUserData(' + index + ')">Delete</button>'; 
+                    cell14.innerHTML = '<button onclick="editUserData(' + index + ')">Edit</button>';
+                });
+            }
+
+
+            function deleteUserData(index) {
+                var userData = JSON.parse(localStorage.getItem('userData')) || [];
+                userData.splice(index, 1);
+                localStorage.setItem('userData', JSON.stringify(userData));
+                displayUserData(); 
+            }
+
+            function editUserData(index) {
+                var userData = JSON.parse(localStorage.getItem('userData')) || [];
+                var user = userData[index];
+
+                localStorage.setItem('editedUserIndex', index);
+                window.location.href = 'ESR.html';
+            }
+
+            </script>
+    </div>
+</body>
+</html>
+

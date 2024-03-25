@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel ="stylesheet" type ="text/css" href = "Luna.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Luna Technology - Edit Sales Report</title>
+</head>
+<body>
+    <header>
+        <div style="display: flex; flex-direction: row;">
+            <div><img src="LUNA-removebg-preview.png" alt="Profile Image" class="logo"></div>
+        </div>
+    </header>
+    <div style="display: flex; flex-direction: row;">
+            <div class="side1">
+                        <h3><a href="Luna.html">HOME</a></h3>
+                        <h3><a href="VSR.html">VIEW SALES REPORT</a></h3>
+                        <h3><a href="ESR.html">EDIT SALES REPORT</a></h3>
+                        <h3><a href="Help.html">HELP</a></h3>
+                </div>
+            <div class="main">
+
+                    <h2 style="margin-left: 20px;">Sales Report Name</h2>
+                
+                    <form id="NameForm">
+                        <table class="tblN">
+                            <tr>
+                                <th><label for="name">Name:</label></th>
+                                <td><input type="text" id="name" size="45px" required></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><button type="button" onclick="addSRN()">Add Name</button></td>
+                            </tr>
+                        </table>
+                    </form>
+                    
+                    <h2 style="margin-left: 20px;">Edit Sales Report</h2>
+                   
+                    <form id="userForm">
+                        <table class="tblN">
+                            <tr>
+                            <th><label for="Date">Date:</label></th>
+                                <td><input type="date" id="Date" required></td>
+                            </tr>
+                            <tr>
+                                <th><label for="Time">Time:</label></th>
+                                <td><input type="time" id="Time" required></td>
+                            </tr>
+                            <tr>
+                                <th><label for="CST">Customer Type:</label></th>
+                                <td>
+                                    <select name="CST" id="CST" required>
+                                        <option value="Regional North">Regional North</option>
+                                        <option value="Northeast">Northeast</option>
+                                        <option value="Regional East">Regional East</option>
+                                        <option value="Southeast">Southeast</option>
+                                        <option value="Regional South">Regional South</option>
+                                        <option value="Soutwest">Soutwest</option>
+                                        <option value="Regional West">Regional West</option>
+                                        <option value="Northwest">Northwest</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label for="NameP">Name:</label></th>
+                                <td><input type="text" id="NameP" required></td>
+                            </tr>
+                            <tr>
+                                <th><label for="CT">Call Type:</label></th>
+                                <td>
+                                    <select name="CT" id="CT" required>
+                                        <option value="Cold Calls">Cold Calls</option>
+                                        <option value="Warm Calls">Warm Calls</option>
+                                        <option value="Prospecting sales Calls">Prospecting sales Calls</option>
+                                        <option value="Sales appointment Calls">Sales appointment Calls</option>
+                                        <option value="Follow-up Calls">Follow-up Calls</option>
+                                        <option value="Service Calls">Service Calls</option>
+                                        <option value="Product Launched Sales Calls">Product Launched Sales Calls</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><label for="Ino">Item No.:</label></th>
+                                <td><input type="text" id="Ino" required></td>
+                            </tr>
+                            <tr>
+                                <th><label for="In">Item Name:</label></th>
+                                <td><input type="text" id="In" required></td>
+                            </tr>
+                            <tr>
+                                <th><label for="Ide">Item Description:</label></th>
+                                <td><input type="text" id="Ide" required></td>
+                            </tr>
+                            <tr>
+                                <th><label for="UC">Unit Cost(₱):</label></th>
+                                <td><input type="number" id="UC" required></td>
+                            </tr>
+                            <tr>
+                                <th><label for="Quantity">Quantity:</label></th>
+                                <td><input type="number" id="Quantity" required></td>
+                            </tr>
+                            <tr>
+                                <th><label for="TaxR">Tax Rate (%):</label></th>
+                                <td><input type="number" id="TaxR" required></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><button type="button" onclick="addUser()">Add / Edit User</button></td>
+                            </tr>
+                        </table>
+                    </form>
+        
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            var editedUserIndex = localStorage.getItem('editedUserIndex');
+                            if (editedUserIndex !== null) {
+                                var userData = JSON.parse(localStorage.getItem('userData')) || [];
+                                var editedUser = userData[editedUserIndex];
+                                
+                                document.getElementById('Date').value = editedUser.Date;
+                                document.getElementById('Time').value = editedUser.Time;
+                                document.getElementById('CST').value = editedUser.CST;
+                                document.getElementById('NameP').value = editedUser.NameP;
+                                document.getElementById('CT').value = editedUser.CT;
+                                document.getElementById('Ino').value = editedUser.Ino;
+                                document.getElementById('In').value = editedUser.In;
+                                document.getElementById('Ide').value = editedUser.Ide;
+                                document.getElementById('UC').value = editedUser.UC;
+                                document.getElementById('Quantity').value = editedUser.Quantity;
+                                document.getElementById('TaxR').value = editedUser.TaxR;
+
+                                // Clear the editedUserIndex from local storage once data is loaded
+                                localStorage.removeItem('editedUserIndex');
+                            }
+                        });
+                        function addUser() {
+                            var Date = document.getElementById('Date').value;
+                            var Time = document.getElementById('Time').value;
+                            var CST = document.getElementById('CST').value;
+                            var NameP = document.getElementById('NameP').value;
+                            var CT = document.getElementById('CT').value;
+                            var Ino = document.getElementById('Ino').value;
+                            var In = document.getElementById('In').value;
+                            var Ide = document.getElementById('Ide').value;
+                            var UC = document.getElementById('UC').value;
+                            var Quantity = document.getElementById('Quantity').value;
+                            var TaxR = document.getElementById('TaxR').value;
+                
+                            if (Date && Time && CST && NameP && CT && Ino && In && Ide && UC && Quantity && TaxR) {
+                                var userData = JSON.parse(localStorage.getItem('userData')) || [];
+                                userData.push({ Date: Date, Time: Time, CST: CST, NameP: NameP, CT: CT, Ino: Ino, In: In, Ide: Ide, UC: UC, Quantity: Quantity, TaxR: TaxR });
+                                localStorage.setItem('userData', JSON.stringify(userData));
+                                alert('Sales Report added successfully!');
+                                document.getElementById('userForm').reset();
+                            } else {
+                                alert('Please fill in all fields.');
+                            }
+                        }
+                
+                        function addSRN() {
+                            var name = document.getElementById('name').value;
+                
+                            if (name) {
+                                var SRN = JSON.parse(localStorage.getItem('SRNData')) || [];
+                                SRN.push({ name: name});
+                                localStorage.setItem('SRNData', JSON.stringify(SRN));
+                                alert('Name added successfully!');
+                                document.getElementById('NameForm').reset(); 
+                            } else {
+                                alert('Please fill in all fields.');
+                            }
+                        }
+                    </script>
+                
+            </div>   
+    </div>
+</body>
+</html>

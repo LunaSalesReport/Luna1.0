@@ -1,0 +1,104 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: white;
+    height: 900px;
+    padding-bottom: 0;
+    font-family: "Arsenal", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+header{
+    background-color: #cf0c16;
+}
+.logo{
+    width: 150px;
+    height: 150px;
+    margin-left: 50px;
+}
+.side1{
+    width: 250px;
+    height: 900px;
+    padding-right: 10px;
+    padding-left: 20px;
+    background-color: #241b1c;
+    transition: background-color 2s ease-out 100ms
+}
+.side1:hover{
+    background-color: #403232;
+}
+.main{
+    width: 1000px;
+    
+}
+.Choicebox1{
+    width: 320px;
+    height: 50px;
+    padding: 10px;
+    border: 5px solid gray;
+    background-color: #635a5b;
+    margin: 30px;
+    text-align: center;
+}
+.Choicebox1:hover {
+    background-color: #403a3a;
+}
+.Choicebox2{
+    width: 320px;
+    height: 50px;
+    padding: 10px;
+    border: 5px solid gray;
+    background-color: #635a5b;
+    margin: 30px;
+    text-align: center;
+
+}
+.Choicebox2:hover {
+    background-color: #403a3a;
+}
+.a{
+    font-weight: 700;
+    margin-left: 30px;
+    margin-bottom: 2px;
+}
+.b{
+    font-weight: 100;
+    margin-left: 75px;
+    margin-right: 30px;
+    margin-top: 2px;
+}
+a:link{
+    color: #a38b8c;
+    background-color: transparent;
+    text-decoration: none;
+}
+a:hover{
+    color: #730d06;
+    background-color: transparent;
+    text-decoration: none;
+}
+a{
+    color: #a38b8c;
+}
+.ht{
+    font-weight: 700;
+    text-align: center;
+}
+.hlp{
+    font-weight: 100;
+    text-align: center;
+}
+.vsrtop{
+    padding-left: 40px;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th{
+    width: 80px;
+}
+.tblN{
+    margin-left: 40px;
+    margin-bottom: 20px;
+}
